@@ -2,35 +2,28 @@
 const searchIcon = document.getElementById("search-icon");
 const searchForm = document.getElementById("search-form");
 
-searchIcon.addEventListener("click", () => {
+searchIcon.addEventListener("click", (e) => {
+    e.stopPropagation();
     searchForm.classList.toggle("show");
+    cartItemsContainer.classList.remove("active"); // Close cart if open
 });
 
 // Toggle cart visibility
 const cartIcon = document.getElementById("cart-icon");
 const cartItemsContainer = document.getElementById("cart-items-container");
 
-cartIcon.addEventListener("click", () => {
+cartIcon.addEventListener("click", (e) => {
+    e.stopPropagation();
     cartItemsContainer.classList.toggle("active");
+    searchForm.classList.remove("show"); // Close search if open
 });
 
 // Close cart when clicking outside
 document.addEventListener("click", (e) => {
-    if (!cartIcon.contains(e.target) && !cartItemsContainer.contains(e.target)) {
+    if (!cartItemsContainer.contains(e.target)) {
         cartItemsContainer.classList.remove("active");
     }
-});
-
-// Close search form when clicking outside
-document.addEventListener("click", (e) => {
-    if (!searchIcon.contains(e.target) && !searchForm.contains(e.target)) {
+    if (!searchForm.contains(e.target)) {
         searchForm.classList.remove("show");
     }
 });
-// cd D:/ImpactTraining/Coffee
-// git init
-// git add .
-// git commit -m "Initial commit"
-// git remote add origin https://github.com/username/Coffee.git
-// git branch -M main
-// git push -u origin main
